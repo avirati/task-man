@@ -8,6 +8,7 @@ export interface Task {
 }
 
 export interface TaskContextValues {
+  isLoading: boolean;
   tasks: Task[];
   statuses: TaskStatus[];
 

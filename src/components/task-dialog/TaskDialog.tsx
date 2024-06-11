@@ -26,7 +26,7 @@ export const TaskDialog = () => {
 
   const [title, setTitle] = React.useState(selectedTask?.title);
   const [description, setDescription] = React.useState(
-    selectedTask?.description
+    selectedTask?.description || ''
   );
   const [taskStatus, setTaskStatus] = React.useState<TaskStatus | undefined>(
     status || selectedTask?.status
@@ -40,16 +40,16 @@ export const TaskDialog = () => {
 
   const isFormValid = Boolean(title);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (isFormValid) {
       if (isUpdateMode) {
-        updateTask(selectedTask!.id, {
+        await updateTask(selectedTask!.id, {
           title: title!,
           status: taskStatus!,
           description,
         });
       } else {
-        addTask({
+        await addTask({
           title: title!,
           status: taskStatus!,
           description,
