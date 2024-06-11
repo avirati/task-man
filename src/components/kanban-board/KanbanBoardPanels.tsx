@@ -1,6 +1,7 @@
-import { Flex } from '@radix-ui/themes';
+import { Flex, Text } from '@radix-ui/themes';
 
 import { useTasks } from '@/hooks/use-tasks';
+import { getStatusText } from '@/helpers';
 
 export const KanbanBoardPanels = () => {
   const { statuses } = useTasks();
@@ -13,13 +14,14 @@ export const KanbanBoardPanels = () => {
         height: 'calc(100vh - 64px - 64px)',
         overflowY: 'auto',
         backgroundColor: '#f5f5fa',
-        width: '320px',
         borderRadius: '4px',
-        boxShadow: '#ccc 0 0 10px inset',
-        padding: '32px',
+        padding: '8px',
+        flexGrow: 1,
       }}
     >
-      {status}
+      <Text style={{ color: '#aaa', fontWeight: 'bold' }}>
+        {getStatusText(status)}
+      </Text>
     </Flex>
   ));
 };

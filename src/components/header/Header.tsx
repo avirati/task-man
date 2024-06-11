@@ -6,7 +6,7 @@ export const Header = () => {
       style={{
         width: '100vw',
         height: '64px',
-        padding: '16px',
+        padding: '16px 32px',
         background: '#4d88ac',
         color: '#f5f5fa',
         boxShadow: '0 0 10px #000',
