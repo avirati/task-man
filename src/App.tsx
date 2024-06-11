@@ -2,6 +2,7 @@ import { Flex } from '@radix-ui/themes';
 
 import { Header } from './components/header';
 import { KanbanBoard } from './components/kanban-board';
+import { Outlet } from 'react-router-dom';
 
 export const App = () => {
   return (
@@ -10,6 +11,7 @@ export const App = () => {
       <KanbanBoard>
         <KanbanBoard.Panels />
       </KanbanBoard>
+      <Outlet />
     </Flex>
   );
 };

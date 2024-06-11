@@ -1,8 +1,10 @@
-import { Flex, Text } from '@radix-ui/themes';
+import { Flex, IconButton, Text } from '@radix-ui/themes';
 
 import { TaskStatus, useTasks } from '@/hooks/use-tasks';
 import { getStatusText } from '@/helpers';
 import { TaskCard } from '../task-card';
+import { PlusIcon } from '@radix-ui/react-icons';
+import { useNavigate } from 'react-router-dom';
 
 interface TaskContainerProps {
   status: TaskStatus;
@@ -10,12 +12,22 @@ interface TaskContainerProps {
 
 const TaskContainer: React.FC<TaskContainerProps> = ({ status }) => {
   const { tasks } = useTasks(status);
+  const navigate = useNavigate();
 
   return (
     <>
-      <Text style={{ color: '#aaa', fontWeight: 'bold' }}>
-        {getStatusText(status)} {tasks.length > 0 && `(${tasks.length})`}
-      </Text>
+      <Flex justify='between'>
+        <Text style={{ color: '#aaa', fontWeight: 'bold' }}>
+          {getStatusText(status)} {tasks.length > 0 && `(${tasks.length})`}
+        </Text>
+        <IconButton
+          variant='soft'
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate(`/new/${status}`)}
+        >
+          <PlusIcon width='18' height='18' />
+        </IconButton>
+      </Flex>
       {tasks.map((task) => (
         <TaskCard task={task} key={task.id} />
       ))}
