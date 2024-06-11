@@ -1,7 +1,27 @@
 import { Flex, Text } from '@radix-ui/themes';
 
-import { useTasks } from '@/hooks/use-tasks';
+import { TaskStatus, useTasks } from '@/hooks/use-tasks';
 import { getStatusText } from '@/helpers';
+import { TaskCard } from '../task-card';
+
+interface TaskContainerProps {
+  status: TaskStatus;
+}
+
+const TaskContainer: React.FC<TaskContainerProps> = ({ status }) => {
+  const { tasks } = useTasks(status);
+
+  return (
+    <>
+      <Text style={{ color: '#aaa', fontWeight: 'bold' }}>
+        {getStatusText(status)} {tasks.length > 0 && `(${tasks.length})`}
+      </Text>
+      {tasks.map((task) => (
+        <TaskCard task={task} key={task.id} />
+      ))}
+    </>
+  );
+};
 
 export const KanbanBoardPanels = () => {
   const { statuses } = useTasks();
@@ -9,7 +29,8 @@ export const KanbanBoardPanels = () => {
   return statuses.map((status) => (
     <Flex
       direction='column'
-      gap='5'
+      gap='3'
+      key={`kanban-panel-${status}`}
       style={{
         height: 'calc(100vh - 64px - 64px)',
         overflowY: 'auto',
@@ -19,9 +40,7 @@ export const KanbanBoardPanels = () => {
         flexGrow: 1,
       }}
     >
-      <Text style={{ color: '#aaa', fontWeight: 'bold' }}>
-        {getStatusText(status)}
-      </Text>
+      <TaskContainer status={status} />
     </Flex>
   ));
 };
