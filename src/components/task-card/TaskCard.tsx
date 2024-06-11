@@ -18,7 +18,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         cursor: 'pointer',
       }}
     >
-      <Text style={{ fontSize: '12px', color: '#4d88ac', fontWeight: 'bold' }}>
+      <Text style={{ fontSize: '12px', color: '#3E63DD', fontWeight: 'bold' }}>
         {task.id}
       </Text>
       <Text style={{ fontSize: '14px', color: '#555' }}>{task.title}</Text>

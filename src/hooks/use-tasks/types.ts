@@ -10,4 +10,6 @@ export interface Task {
 export interface TaskContextValues {
   tasks: Task[];
   statuses: TaskStatus[];
+
+  addTask: (task: Omit<Task, 'id'>) => void;
 }
