@@ -1,10 +1,15 @@
-import { Box } from '@radix-ui/themes';
+import { Flex } from '@radix-ui/themes';
+
 import { Header } from './components/Header';
+import { KanbanBoard } from './components/kanban-board';
 
 export const App = () => {
   return (
-    <Box>
+    <Flex direction='column' align='center'>
       <Header />
-    </Box>
+      <KanbanBoard>
+        <KanbanBoard.Panels />
+      </KanbanBoard>
+    </Flex>
   );
 };
