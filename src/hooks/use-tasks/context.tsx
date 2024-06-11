@@ -8,6 +8,7 @@ export const TasksContext = React.createContext<TaskContextValues>({
 
   addTask: () => null,
   updateTask: () => null,
+  deleteTask: () => null,
 });
 
 export const TasksProvider = ({ children }: React.PropsWithChildren) => {
@@ -45,6 +46,17 @@ export const TasksProvider = ({ children }: React.PropsWithChildren) => {
     [tasks]
   );
 
+  const deleteTask = React.useCallback(
+    (id: Task['id']) => {
+      const indexToUpdate = tasks.findIndex((task) => task.id === id);
+      const updatedTasks = [...tasks];
+      updatedTasks.splice(indexToUpdate, 1);
+
+      setTasks(updatedTasks);
+    },
+    [tasks]
+  );
+
   const value = React.useMemo<TaskContextValues>(
     () => ({
       tasks,
@@ -52,8 +64,9 @@ export const TasksProvider = ({ children }: React.PropsWithChildren) => {
 
       addTask,
       updateTask,
+      deleteTask,
     }),
-    [tasks, addTask, updateTask]
+    [tasks, addTask, updateTask, deleteTask]
   );
 
   return (
