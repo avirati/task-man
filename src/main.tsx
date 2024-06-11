@@ -19,6 +19,10 @@ const router = createBrowserRouter([
         path: '/new/:status?',
         element: <TaskDialog />,
       },
+      {
+        path: '/tasks/:id',
+        element: <TaskDialog />,
+      },
     ],
   },
 ]);

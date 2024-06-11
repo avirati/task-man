@@ -14,15 +14,24 @@ import { getStatusText } from '@/helpers';
 import { TaskStatus, useTasks } from '@/hooks/use-tasks';
 
 export const TaskDialog = () => {
-  const { statuses, addTask } = useTasks();
+  const { tasks, statuses, addTask, updateTask } = useTasks();
   const navigate = useNavigate();
-  const { status } = useParams<{ status?: TaskStatus }>();
-
-  const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [taskStatus, setTaskStatus] = React.useState<TaskStatus | undefined>(
-    status
+  const { status, id } = useParams<{ status?: TaskStatus; id?: string }>();
+  const selectedTask = React.useMemo(
+    () => tasks.find((task) => task.id === id),
+    [id, tasks]
   );
+
+  const isUpdateMode = Boolean(selectedTask);
+
+  const [title, setTitle] = React.useState(selectedTask?.title);
+  const [description, setDescription] = React.useState(
+    selectedTask?.description
+  );
+  const [taskStatus, setTaskStatus] = React.useState<TaskStatus | undefined>(
+    status || selectedTask?.status
+  );
+
   const [isOpen, setIsOpen] = React.useState(true);
 
   if (status) {
@@ -33,11 +42,19 @@ export const TaskDialog = () => {
 
   const onSubmit = () => {
     if (isFormValid) {
-      addTask({
-        title,
-        status: taskStatus!,
-        description,
-      });
+      if (isUpdateMode) {
+        updateTask(selectedTask!.id, {
+          title: title!,
+          status: taskStatus!,
+          description,
+        });
+      } else {
+        addTask({
+          title: title!,
+          status: taskStatus!,
+          description,
+        });
+      }
 
       setIsOpen(false);
     }
@@ -49,7 +66,7 @@ export const TaskDialog = () => {
       onOpenChange={(open) => !open && navigate('/', { replace: true })}
     >
       <Dialog.Content maxWidth='450px'>
-        <Dialog.Title>New Task</Dialog.Title>
+        <Dialog.Title>{isUpdateMode ? 'Update Task' : 'New Task'}</Dialog.Title>
         <Dialog.Description size='2' mb='4'>
           Add a new task to your list
         </Dialog.Description>
@@ -62,6 +79,7 @@ export const TaskDialog = () => {
             <TextField.Root
               placeholder='What would you like to achieve ?'
               required
+              defaultValue={title}
               onChange={(event) => setTitle(event.target.value)}
             />
           </label>
@@ -72,6 +90,7 @@ export const TaskDialog = () => {
             <TextArea
               placeholder='Elaborate a little...'
               onChange={(event) => setDescription(event.target.value)}
+              defaultValue={description}
             />
           </label>
           <label>
@@ -79,7 +98,7 @@ export const TaskDialog = () => {
               Status
             </Text>
             <Select.Root
-              defaultValue={status || statuses[0]}
+              defaultValue={taskStatus || statuses[0]}
               onValueChange={(value) => setTaskStatus(value as TaskStatus)}
             >
               <Select.Trigger />

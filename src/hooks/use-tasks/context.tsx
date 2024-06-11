@@ -7,6 +7,7 @@ export const TasksContext = React.createContext<TaskContextValues>({
   statuses: [],
 
   addTask: () => null,
+  updateTask: () => null,
 });
 
 export const TasksProvider = ({ children }: React.PropsWithChildren) => {
@@ -25,14 +26,34 @@ export const TasksProvider = ({ children }: React.PropsWithChildren) => {
     [tasks]
   );
 
+  const updateTask = React.useCallback(
+    (id: string, updatedTask: Omit<Task, 'id'>) => {
+      const indexToUpdate = tasks.findIndex((task) => task.id === id);
+
+      const updatedTasks = [...tasks];
+      updatedTasks.splice(indexToUpdate, 1);
+
+      setTasks([
+        ...updatedTasks.slice(0, indexToUpdate),
+        {
+          id,
+          ...updatedTask,
+        },
+        ...updatedTasks.slice(indexToUpdate),
+      ]);
+    },
+    [tasks]
+  );
+
   const value = React.useMemo<TaskContextValues>(
     () => ({
       tasks,
       statuses: ['todo', 'in_progress', 'done'],
 
       addTask,
+      updateTask,
     }),
-    [tasks, addTask]
+    [tasks, addTask, updateTask]
   );
 
   return (

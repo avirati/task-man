@@ -12,4 +12,5 @@ export interface TaskContextValues {
   statuses: TaskStatus[];
 
   addTask: (task: Omit<Task, 'id'>) => void;
+  updateTask: (id: Task['id'], updateTask: Omit<Task, 'id'>) => void;
 }
