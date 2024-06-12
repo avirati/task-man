@@ -9,7 +9,12 @@ export const KanbanBoard: React.FC<React.PropsWithChildren> & {
     <Flex
       direction='row'
       gap='5'
-      style={{ marginTop: '32px', marginBottom: '32px', width: '100%' }}
+      style={{
+        marginTop: '32px',
+        marginBottom: '32px',
+        width: '100%',
+        overflowX: 'auto',
+      }}
     >
       {children}
     </Flex>

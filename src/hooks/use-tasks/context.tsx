@@ -85,7 +85,7 @@ export const TasksProvider = ({ children }: React.PropsWithChildren) => {
   const value = React.useMemo<TaskContextValues>(
     () => ({
       tasks,
-      statuses: ['todo', 'in_progress', 'done'],
+      statuses: ['todo', 'in_progress', 'in_review', 'done'],
       isLoading,
 
       addTask,

@@ -77,6 +77,8 @@ export const KanbanBoardPanels = () => {
         padding: '8px',
         flexGrow: 1,
         position: 'relative',
+        maxWidth: '320px',
+        minWidth: '320px',
         border: isDragging ? '1px dashed #aaa' : '',
       }}
       onDrop={(e) => onDrop(e, status)}

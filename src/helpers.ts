@@ -6,6 +6,8 @@ export const getStatusText = (status: TaskStatus) => {
       return 'TO DO';
     case 'in_progress':
       return 'IN PROGRESS';
+    case 'in_review':
+      return 'IN REVIEW';
     case 'done':
       return 'DONE';
 
