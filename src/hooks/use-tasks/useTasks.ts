@@ -2,6 +2,7 @@ import React from 'react';
 
 import { TasksContext } from './context';
 import { TaskStatus } from './types';
+import { debounce } from 'throttle-debounce';
 
 export const useTasks = (status?: TaskStatus) => {
   const context = React.useContext(TasksContext);
@@ -9,10 +10,13 @@ export const useTasks = (status?: TaskStatus) => {
     throw new Error('useTasks should be wrapped inside TasksProvider');
   }
 
-  const { tasks } = context;
+  const { tasksView, filterTasks } = context;
 
   return {
     ...context,
-    tasks: status ? tasks.filter((task) => task.status === status) : tasks,
+    tasksView: status
+      ? tasksView.filter((task) => task.status === status)
+      : tasksView,
+    filterTasks: debounce(500, filterTasks),
   };
 };

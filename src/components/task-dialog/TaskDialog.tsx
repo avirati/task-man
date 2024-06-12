@@ -14,12 +14,12 @@ import { getStatusText } from '@/helpers';
 import { TaskStatus, useTasks } from '@/hooks/use-tasks';
 
 export const TaskDialog = () => {
-  const { tasks, statuses, addTask, updateTask } = useTasks();
+  const { tasksView, statuses, addTask, updateTask } = useTasks();
   const navigate = useNavigate();
   const { status, id } = useParams<{ status?: TaskStatus; id?: string }>();
   const selectedTask = React.useMemo(
-    () => tasks.find((task) => task.id === id),
-    [id, tasks]
+    () => tasksView.find((task) => task.id === id),
+    [id, tasksView]
   );
 
   const isUpdateMode = Boolean(selectedTask);

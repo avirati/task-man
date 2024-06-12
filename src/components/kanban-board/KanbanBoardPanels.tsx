@@ -12,14 +12,15 @@ interface TaskContainerProps {
 }
 
 const TaskContainer: React.FC<TaskContainerProps> = ({ status }) => {
-  const { tasks } = useTasks(status);
+  const { tasksView } = useTasks(status);
   const navigate = useNavigate();
 
   return (
     <>
       <Flex justify='between'>
         <Text style={{ color: '#aaa', fontWeight: 'bold' }}>
-          {getStatusText(status)} {tasks.length > 0 && `(${tasks.length})`}
+          {getStatusText(status)}{' '}
+          {tasksView.length > 0 && `(${tasksView.length})`}
         </Text>
         <IconButton
           variant='soft'
@@ -29,7 +30,7 @@ const TaskContainer: React.FC<TaskContainerProps> = ({ status }) => {
           <PlusIcon width='18' height='18' />
         </IconButton>
       </Flex>
-      {tasks.map((task) => (
+      {tasksView.map((task) => (
         <TaskCard task={task} key={task.id} />
       ))}
     </>
@@ -37,7 +38,7 @@ const TaskContainer: React.FC<TaskContainerProps> = ({ status }) => {
 };
 
 export const KanbanBoardPanels = () => {
-  const { statuses, tasks, updateTask } = useTasks();
+  const { statuses, tasksView, updateTask } = useTasks();
   const [isDragging, setIsDragging] = React.useState(false);
 
   const onDrop = async (
@@ -47,7 +48,7 @@ export const KanbanBoardPanels = () => {
     setIsDragging(false);
 
     const taskId = event.dataTransfer.getData('taskId') as Task['id'];
-    const task = tasks.find(({ id }) => taskId === id);
+    const task = tasksView.find(({ id }) => taskId === id);
 
     if (!task) return;
     // Do nothing if task is being moved to same status
@@ -70,7 +71,7 @@ export const KanbanBoardPanels = () => {
       gap='3'
       key={`kanban-panel-${status}`}
       style={{
-        height: 'calc(100vh - 64px - 64px)',
+        height: 'calc(100vh - 128px - 32px)',
         overflowY: 'auto',
         backgroundColor: '#f5f5fa',
         borderRadius: '4px',
