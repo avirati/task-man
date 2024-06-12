@@ -21,17 +21,17 @@ export const Filter: React.FC = () => {
   }, [filterText, filterStatus, filterTasks]);
 
   return (
-    <Flex direction='row' gap='5' style={{ padding: '12px 0', width: '100%' }}>
+    <Flex direction='row' gap='1' style={{ padding: '12px 0', width: '100%' }}>
       <TextField.Root
         placeholder='Filter tasks...'
         onChange={(event) => setFilterText(event.target.value)}
-        style={{ width: '320px' }}
+        style={{ minWidth: '158px', maxWidth: '158px' }}
       />
       <Select.Root
         defaultValue='all'
         onValueChange={(value) => setFilterStatus(value as TaskStatus)}
       >
-        <Select.Trigger style={{ width: '320px' }} />
+        <Select.Trigger style={{ width: '158px' }} />
         <Select.Content>
           <Select.Item value='all'>ALL</Select.Item>
           {statuses.map((status) => (

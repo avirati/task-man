@@ -7,7 +7,7 @@ import { Filter } from './components/filter';
 
 export const App = () => {
   return (
-    <Flex direction='column' align='center' style={{ padding: '0 32px' }}>
+    <Flex direction='column' align='center' style={{ padding: '0 28px' }}>
       <Header />
       <Filter />
       <KanbanBoard>
