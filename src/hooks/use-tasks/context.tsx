@@ -123,6 +123,8 @@ export const TasksProvider = ({ children }: React.PropsWithChildren) => {
     [tasksData]
   );
 
+  console.log(tasksData, tasksView);
+
   const value = React.useMemo<TaskContextValues>(
     () => ({
       tasksData,

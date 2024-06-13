@@ -3,8 +3,7 @@
 exports[`KanbanBoard > renders 1`] = `
 <div>
   <div
-    class="rt-Flex rt-r-fd-row rt-r-gap-5"
-    style="margin-bottom: 32px; width: 100%; overflow-x: auto;"
+    class="rt-Flex rt-r-fd-row rt-r-gap-5 c-bFzNrF c-bFzNrF-bzJBWd-isLoading-true"
   >
     <div
       class="rt-Flex rt-r-fd-column rt-r-gap-3"

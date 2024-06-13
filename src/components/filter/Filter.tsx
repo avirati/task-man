@@ -18,7 +18,7 @@ export const Filter: React.FC = () => {
     ) as TaskStatus | undefined;
 
     filterTasks({ text: filterText, taskStatus: status });
-  }, [filterText, filterStatus, filterTasks]);
+  }, [filterText, filterStatus]);
 
   return (
     <Flex direction='row' gap='1' style={{ padding: '12px 0', width: '100%' }}>
