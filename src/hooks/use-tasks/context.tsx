@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Task, TaskContextValues, TaskStatus } from './types';
 import { TaskRepository } from '@/models/task';
+import { STATUSES } from '@/constants';
 
 export const TasksContext = React.createContext<TaskContextValues>({
   isLoading: false,
@@ -126,7 +127,7 @@ export const TasksProvider = ({ children }: React.PropsWithChildren) => {
     () => ({
       tasksData,
       tasksView,
-      statuses: ['todo', 'in_progress', 'in_review', 'done'],
+      statuses: STATUSES,
       isLoading,
 
       addTask,

@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# Taskman
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A kanban styled task manager
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+1. Create `.env` file at root or just copy `.env.example` as `.env` and update variables to connect to firebase
+2. Install dependencies
+```bash
+yarn
+```
+3. Run the dev server
+```bash
+yarn dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+It should be up and running at `http://localhost:8080`
+
+4. (Optionally) run unit tests
+```bash
+yarn test
+```
+
+## Supported Features
+1. Taskman supports 4 statuses for a task - `TO DO` | `IN PROGRESS` | `IN REVIEW` | `DONE`. It can be altered by updating `STATUSES` in `src/constants.ts`
+2. Add a task in any status, click `+` on respective sections
+3. Update a task
+4. Delete a task
+5. Drag and Drop support for task cards
+6. Filter tasks by `id`, `title` and `status`
+7. Syncing data to Firebase
