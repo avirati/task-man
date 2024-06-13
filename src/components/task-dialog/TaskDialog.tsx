@@ -81,6 +81,7 @@ export const TaskDialog = () => {
               required
               defaultValue={title}
               onChange={(event) => setTitle(event.target.value)}
+              aria-label='Task Title'
             />
           </label>
           <label>
@@ -91,6 +92,7 @@ export const TaskDialog = () => {
               placeholder='Elaborate a little...'
               onChange={(event) => setDescription(event.target.value)}
               defaultValue={description}
+              aria-label='Task Description'
             />
           </label>
           <label>

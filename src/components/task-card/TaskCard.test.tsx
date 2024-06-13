@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { describe, it } from 'vitest';
 
 import { Task } from '@/hooks/use-tasks';
 import { TaskCard } from './TaskCard';
@@ -12,7 +13,7 @@ const task: Task = {
 };
 
 describe('TaskCard', () => {
-  test('renders', async () => {
+  it('renders', async () => {
     const { container } = render(
       <MemoryRouter>
         <TaskCard task={task} />

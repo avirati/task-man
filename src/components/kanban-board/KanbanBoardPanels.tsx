@@ -18,7 +18,11 @@ const TaskContainer: React.FC<TaskContainerProps> = ({ status }) => {
   return (
     <>
       <Flex justify='between'>
-        <Text style={{ color: '#aaa', fontWeight: 'bold' }}>
+        <Text
+          as='p'
+          style={{ color: '#aaa', fontWeight: 'bold' }}
+          role='status'
+        >
           {getStatusText(status)}{' '}
           {tasksView.length > 0 && `(${tasksView.length})`}
         </Text>
